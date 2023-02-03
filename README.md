@@ -1,3 +1,3 @@
 # University Backend
 
-Ejercicio planteado para la sesión "Introducción a .NET y creación de APIs" de Open Bootcamp
+Primera entrega de University-Api-Backend planteado en la sesion "Introducción a .NET y creación de APIs" de Open Bootcamp
