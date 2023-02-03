@@ -11,7 +11,10 @@ namespace University_API_Backend.DataAcces
         }
 
         //"Add DbSets" -> Añadir tablas de nuestra BD
-        public DbSet<Usuario> Usuarios { get; set; }
-        public DbSet<Curso> Cursos { get; set; }
+        public DbSet<Usuario>? Usuarios { get; set; }
+        public DbSet<Curso>? Cursos { get; set; }
+        public DbSet<Categoria>? Categorias { get; set; }
+        public DbSet<Estudiante>? Estudiantes { get; set; }
+        public DbSet<Indice>? Indices { get; set; }
     }
 }

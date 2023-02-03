@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace University_API_Backend.Models
 {
@@ -7,11 +8,18 @@ namespace University_API_Backend.Models
         [Required]
         [Key]
         public int Id { get; set; }
-        public string CreatedBy { get; set; } = string.Empty;
+        [Required]
+        [ForeignKey("created_by")]
+        public Usuario CreatedBy { get; set; } = new Usuario();
+        //public string CreatedBy { get; set; } = string.Empty;
         public DateTime CreatedAt { get; set; } = DateTime.Now;
-        public string UpdatedBy { get; set; } = string.Empty;
+        [ForeignKey("updated_by")]
+        public Usuario? UpdatedBy { get; set; }
+        //public string? UpdatedBy { get; set; }
         public DateTime? UpdatedAt { get; set; }
-        public string DeletedBy { get; set; } = string.Empty;
+        [ForeignKey("deleted_by")]
+        public Usuario? DeletedBy { get; set; }
+        //public string? DeletedBy { get; set; }
         public DateTime? DeletedAt { get; set; }
         public bool isDeleted { get; set; } = false;
 

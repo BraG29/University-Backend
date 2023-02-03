@@ -18,6 +18,8 @@ namespace University_API_Backend.Controllers
             _logger = logger;
         }
 
+        //Metodo: GET -> localhost:7157/WeatherForecast
+
         [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
         {

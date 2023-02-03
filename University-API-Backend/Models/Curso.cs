@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using University_API_Backend.Enums;
 
 namespace University_API_Backend.Models
@@ -17,6 +19,10 @@ namespace University_API_Backend.Models
         [Required]
         public string requisitos { get; set; } = string.Empty;
         [Required]
-        public NivelCursos nivel { get; set; } 
+        public NivelCursos nivel { get; set; }
+        public ICollection<Categoria> categorias { get; set; } = new List<Categoria>();
+        public ICollection<Estudiante> estudiantes { get; set; } = new List<Estudiante>();
+        public int indiceId { get; set; }
+        public virtual Indice indice { get; set; } = new Indice();
     }
 }
