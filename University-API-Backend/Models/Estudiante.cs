@@ -13,5 +13,12 @@ namespace University_API_Backend.Models
         [Required]
         public DateTime fechaNac { get; set; }
         public ICollection<Curso> cursos { get; set; } = new List<Curso>();
+
+        public int getEdad()
+        {
+            DateTime fechaActual = DateTime.Now;
+            DateTime fechaDiff = DateTime.Today.Add(fechaActual.Subtract(fechaNac));
+            return fechaDiff.Year - fechaActual.Year;
+        }
     }
 }
