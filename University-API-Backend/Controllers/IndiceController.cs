@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using University_API_Backend.DataAcces;
 using University_API_Backend.Models;
+using University_API_Backend.Services;
 
 namespace University_API_Backend.Controllers
 {
@@ -15,10 +16,12 @@ namespace University_API_Backend.Controllers
     public class IndiceController : ControllerBase
     {
         private readonly UniversityDBContext _context;
+        private readonly IIndicesService _indicesService;
 
-        public IndiceController(UniversityDBContext context)
+        public IndiceController(UniversityDBContext context, IIndicesService indicesService)
         {
             _context = context;
+            _indicesService = indicesService;
         }
 
         // GET: api/Indice

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using University_API_Backend.DataAcces;
 using University_API_Backend.Models;
+using University_API_Backend.Services;
 
 namespace University_API_Backend.Controllers
 {
@@ -15,10 +16,13 @@ namespace University_API_Backend.Controllers
     public class EstudianteController : ControllerBase
     {
         private readonly UniversityDBContext _context;
+        //Servicio
+        private readonly IEstudiantesService _estudiantesService;
 
-        public EstudianteController(UniversityDBContext context)
+        public EstudianteController(UniversityDBContext context, IEstudiantesService estudiantesService) 
         {
             _context = context;
+            _estudiantesService = estudiantesService;
         }
 
         // GET: api/Estudiante

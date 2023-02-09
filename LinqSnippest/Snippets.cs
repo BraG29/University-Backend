@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Microsoft.CodeAnalysis.Operations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 
 namespace LinqSnippets
@@ -262,6 +264,92 @@ namespace LinqSnippets
 
             //Tomar valores por condicion
             var takeWhile = myList.TakeWhile(num => num < 4); //{1,2,3}
+        }
+
+        //Paginacion con skip y take
+        static public IEnumerable<T> GetPage<T>(IEnumerable<T> collection, int pageNumber, int resultsPerPage)
+        {
+            int startIndex = (pageNumber - 1) * resultsPerPage;
+            return collection.Skip(startIndex).Take(resultsPerPage);
+        }
+
+        //Variables en consultas LinQ
+        static void LinqVariables()
+        {
+            int[] numeros =
+            {
+                1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+            };
+            var aboveAverage =
+                from numero in numeros
+                let promedio = numeros.Average()
+                let numeroCuadrado = Math.Pow(numero, 2)
+                where numeroCuadrado > promedio
+                select numero;
+        }
+
+        //Zip
+        public static void ZipLinQ()
+        {
+            int[] numeros =
+            {
+                1, 2, 3, 4, 5
+            };
+            string[] stringNumeros =
+            {
+                "uno", "dos", "tres", "cuatro", "cinco"
+            };
+            IEnumerable<string> zipNumeros = numeros.Zip(stringNumeros, (numero, palabra)
+                => numero + " = " + palabra);
+        }
+        //Range & Repeat
+        public static void repeatRangeLinQ()
+        {
+            //Generar una coleccion de 1 a 1000 --> Range 
+            var first1000 = Enumerable.Range(1, 1000);
+
+            //Repetir un valor n cantidad de veces
+            var fiveXs = Enumerable.Repeat("X", 5);
+        }
+        //All
+        public static void allLinQ()
+        {
+            var numeros = new List<int>
+            {
+                1, 2, 3, 4, 5
+            };
+            bool allAreSmallerThan10 = numeros.All(x => x < 10); //true
+            bool allAreMultipliesOf2 = numeros.All(x => x % 2 == 0); //false
+        }
+
+        //Agregacion 
+        public static void aggregateQueries()
+        {
+            int[] numeros = 
+            {
+                1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+            };
+            int sum = numeros.Aggregate((previo, actual) => previo + actual);
+        }
+        //Distinct
+        static public void distinctValues()
+        {
+            int[] numeros =
+            {
+                1, 2, 3, 4, 5, 5, 4, 3, 2, 1
+            };
+            var distinctValues = numeros.Distinct();
+        }
+        //GroupBy
+        static public void groupByExaples()
+        {
+            int[] numeros =
+            {
+                1, 2, 3, 4, 5, 6, 7, 8, 9
+            };
+            //Separar los numeros pares e impares en grupos
+            var grouped = numeros.GroupBy(x => x % 2 == 0);
+            //El primer grupo es el que no cumple la condicion y el segundo el que si
         }
     }
 }
