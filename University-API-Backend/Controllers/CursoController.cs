@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -48,6 +50,7 @@ namespace University_API_Backend.Controllers
         // PUT: api/Curso/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator")]
         public async Task<IActionResult> PutCurso(int id, Curso curso)
         {
             if (id != curso.Id)
@@ -79,6 +82,7 @@ namespace University_API_Backend.Controllers
         // POST: api/Curso
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator")]
         public async Task<ActionResult<Curso>> PostCurso(Curso curso)
         {
             _context.Cursos.Add(curso);
@@ -89,6 +93,7 @@ namespace University_API_Backend.Controllers
 
         // DELETE: api/Curso/5
         [HttpDelete("{id}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator")]
         public async Task<IActionResult> DeleteCurso(int id)
         {
             var curso = await _context.Cursos.FindAsync(id);

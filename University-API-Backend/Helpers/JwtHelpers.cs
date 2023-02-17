@@ -2,6 +2,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using University_API_Backend.Models;
+using University_API_Backend.Enums;
 
 namespace University_API_Backend.Helpers
 {
@@ -15,19 +16,10 @@ namespace University_API_Backend.Helpers
                 new Claim(ClaimTypes.Name, userAccounts.UserName),
                 new Claim(ClaimTypes.Email, userAccounts.EmailId),
                 new Claim(ClaimTypes.NameIdentifier, id.ToString()),
-                new Claim(ClaimTypes.Expiration, DateTime.Now.AddDays(1).ToString("MMM ddd dd yyyy HH:mm:ss tt"))
+                new Claim(ClaimTypes.Expiration, DateTime.Now.AddDays(1).ToString("MMM ddd dd yyyy HH:mm:ss tt")),
+                new Claim(ClaimTypes.Role, userAccounts.Rol.ToString())
 
             };
-
-            if(userAccounts.UserName == "Admin" ) 
-            {
-                claims.Add(new Claim(ClaimTypes.Role, "Administrator"));
-            }else if(userAccounts.UserName == "User 1")
-            {
-                claims.Add(new Claim(ClaimTypes.Role, "User"));
-                claims.Add(new Claim("UserOnly", "User 1"));
-
-            }
             return claims;
         }
 

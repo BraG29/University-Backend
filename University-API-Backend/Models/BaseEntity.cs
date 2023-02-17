@@ -8,9 +8,8 @@ namespace University_API_Backend.Models
         [Required]
         [Key]
         public int Id { get; set; }
-        [Required]
         [ForeignKey("created_by")]
-        public Usuario CreatedBy { get; set; } = new Usuario();
+        public Usuario? CreatedBy { get; set; }
         //public string CreatedBy { get; set; } = string.Empty;
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         [ForeignKey("updated_by")]

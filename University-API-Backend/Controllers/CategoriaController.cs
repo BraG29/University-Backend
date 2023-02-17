@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -45,6 +47,7 @@ namespace University_API_Backend.Controllers
         // PUT: api/Categoria/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator")]
         public async Task<IActionResult> PutCategoria(int id, Categoria categoria)
         {
             if (id != categoria.Id)
@@ -76,6 +79,7 @@ namespace University_API_Backend.Controllers
         // POST: api/Categoria
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator")]
         public async Task<ActionResult<Categoria>> PostCategoria(Categoria categoria)
         {
             _context.Categorias.Add(categoria);
@@ -86,6 +90,7 @@ namespace University_API_Backend.Controllers
 
         // DELETE: api/Categoria/5
         [HttpDelete("{id}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator")]
         public async Task<IActionResult> DeleteCategoria(int id)
         {
             var categoria = await _context.Categorias.FindAsync(id);

@@ -1,4 +1,6 @@
-﻿namespace University_API_Backend.Models
+﻿using University_API_Backend.Enums;
+
+namespace University_API_Backend.Models
 {
     public class UserTokens
     {
@@ -10,5 +12,6 @@
         public string EmailId { get; set; }
         public Guid GuidId { get; set; }
         public DateTime ExpiredTime { get; set; }
+        public RolUsr Rol { get; set; }
     }
 }

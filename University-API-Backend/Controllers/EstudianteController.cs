@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -49,6 +51,7 @@ namespace University_API_Backend.Controllers
         // PUT: api/Estudiante/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator")]
         public async Task<IActionResult> PutEstudiante(int id, Estudiante estudiante)
         {
             if (id != estudiante.Id)
@@ -80,6 +83,7 @@ namespace University_API_Backend.Controllers
         // POST: api/Estudiante
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator")]
         public async Task<ActionResult<Estudiante>> PostEstudiante(Estudiante estudiante)
         {
             _context.Estudiantes.Add(estudiante);
@@ -90,6 +94,7 @@ namespace University_API_Backend.Controllers
 
         // DELETE: api/Estudiante/5
         [HttpDelete("{id}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator")]
         public async Task<IActionResult> DeleteEstudiante(int id)
         {
             var estudiante = await _context.Estudiantes.FindAsync(id);

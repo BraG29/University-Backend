@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using University_API_Backend.DataAcces;
 using University_API_Backend.Helpers;
 using University_API_Backend.Models;
 
@@ -12,8 +14,9 @@ namespace University_API_Backend.Controllers
     public class AccountController : ControllerBase
     {
         private readonly JwtSettings _jwtSettings;
+        private readonly UniversityDBContext _context;
 
-        private IEnumerable<Usuario> _logins = new List<Usuario>
+/*        private IEnumerable<Usuario> _logins = new List<Usuario>
         {
             new Usuario()
             {
@@ -29,11 +32,12 @@ namespace University_API_Backend.Controllers
                 nombre = "User1",
                 contrasenia = "pepe"
             }
-        };
-        
-        public AccountController(JwtSettings jwtSettings)
+        };*/
+
+        public AccountController(JwtSettings jwtSettings, UniversityDBContext context)
         {
             _jwtSettings = jwtSettings;
+            _context = context;
         }
 
         [HttpPost]
@@ -42,20 +46,18 @@ namespace University_API_Backend.Controllers
             try
             {
                 var Token = new UserTokens();
-                var valid = _logins.Any(usr => usr.nombre.Equals(usrLogin.UserName, StringComparison.OrdinalIgnoreCase));
-                if (valid)
+                Usuario? user = _context.Usuarios
+                    .FirstOrDefault(usr => usr.nombre.ToLower() == usrLogin.UserName.ToLower() 
+                    && usr.contrasenia.ToLower() == usrLogin.Password.ToLower());
+                if (user != null)
                 {
-                    var user = _logins.FirstOrDefault(usr 
-                        => usr.nombre.Equals(usrLogin.UserName, StringComparison.OrdinalIgnoreCase));
                     Token = JwtHelpers.GetTokenKey(new UserTokens()
                     {
                         UserName = user.nombre,
                         EmailId = user.email,
                         Id = user.Id,
                         GuidId = new Guid(),
-
-
-
+                        Rol = user.rol
                     }, _jwtSettings);
                 }
                 else
@@ -74,7 +76,7 @@ namespace University_API_Backend.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator")]
         public IActionResult GetUserList()
         {
-            return Ok(_logins);
+            return Ok(_context.Usuarios);
         }
     }
 }

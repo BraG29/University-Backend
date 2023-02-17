@@ -1,4 +1,7 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 
 namespace University_API_Backend.Controllers
 {
@@ -21,6 +24,7 @@ namespace University_API_Backend.Controllers
         //Metodo: GET -> localhost:7157/WeatherForecast
 
         [HttpGet(Name = "GetWeatherForecast")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator, User")]
         public IEnumerable<WeatherForecast> Get()
         {
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast

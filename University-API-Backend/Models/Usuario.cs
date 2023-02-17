@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using University_API_Backend.Enums;
 
 namespace University_API_Backend.Models
 {
@@ -12,7 +13,7 @@ namespace University_API_Backend.Models
         public string email { get; set; } = string.Empty;
         [Required]
         public string contrasenia { get; set; } = string.Empty;
-
-
+        [Required]
+        public RolUsr rol { get; set; }
     }
 }

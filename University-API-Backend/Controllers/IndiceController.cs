@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -48,6 +50,7 @@ namespace University_API_Backend.Controllers
         // PUT: api/Indice/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator")]
         public async Task<IActionResult> PutIndice(int id, Indice indice)
         {
             if (id != indice.Id)
@@ -79,6 +82,7 @@ namespace University_API_Backend.Controllers
         // POST: api/Indice
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator")]
         public async Task<ActionResult<Indice>> PostIndice(Indice indice)
         {
             _context.Indices.Add(indice);
@@ -89,6 +93,7 @@ namespace University_API_Backend.Controllers
 
         // DELETE: api/Indice/5
         [HttpDelete("{id}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator")]
         public async Task<IActionResult> DeleteIndice(int id)
         {
             var indice = await _context.Indices.FindAsync(id);
