@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
 using University_API_Backend.DataAcces;
 using University_API_Backend.Helpers;
 using University_API_Backend.Models;
@@ -15,29 +16,32 @@ namespace University_API_Backend.Controllers
     {
         private readonly JwtSettings _jwtSettings;
         private readonly UniversityDBContext _context;
+        private readonly IStringLocalizer<AccountController> _stringLocalizer;
 
-/*        private IEnumerable<Usuario> _logins = new List<Usuario>
-        {
-            new Usuario()
-            {
-                Id = 1,
-                email = "admin@mail.com",
-                nombre = "Admin",
-                contrasenia = "Admin"
-            },
-            new Usuario()
-            {
-                Id = 2,
-                email = "pepe@mail.com",
-                nombre = "User1",
-                contrasenia = "pepe"
-            }
-        };*/
+        /*        private IEnumerable<Usuario> _logins = new List<Usuario>
+                {
+                    new Usuario()
+                    {
+                        Id = 1,
+                        email = "admin@mail.com",
+                        nombre = "Admin",
+                        contrasenia = "Admin"
+                    },
+                    new Usuario()
+                    {
+                        Id = 2,
+                        email = "pepe@mail.com",
+                        nombre = "User1",
+                        contrasenia = "pepe"
+                    }
+                };*/
 
-        public AccountController(JwtSettings jwtSettings, UniversityDBContext context)
+        public AccountController(JwtSettings jwtSettings, UniversityDBContext context, 
+            IStringLocalizer<AccountController> stringLocalizer)
         {
             _jwtSettings = jwtSettings;
             _context = context;
+            _stringLocalizer = stringLocalizer;
         }
 
         [HttpPost]
@@ -49,6 +53,10 @@ namespace University_API_Backend.Controllers
                 Usuario? user = _context.Usuarios
                     .FirstOrDefault(usr => usr.nombre.ToLower() == usrLogin.UserName.ToLower() 
                     && usr.contrasenia.ToLower() == usrLogin.Password.ToLower());
+                //"University-API-Backend.Resources.University_API_Backend.Controllers.AccountController"
+                //"University-API-Backend.Resources.University_API_Backend.Controllers.AccountController"
+
+                var saludo = _stringLocalizer["Welcome"];
                 if (user != null)
                 {
                     Token = JwtHelpers.GetTokenKey(new UserTokens()
@@ -64,7 +72,11 @@ namespace University_API_Backend.Controllers
                 {
                     return BadRequest("Wrong Credentials");
                 }
-                return Ok(Token);
+                return Ok(new
+                {
+                    Saludo = saludo.Value,
+                    Token
+                });
             }catch(Exception ex)
             {
                 throw new Exception("GetToken Error", ex);

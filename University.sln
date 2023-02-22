@@ -3,9 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "University-API-Backend", "University-API-Backend\University-API-Backend.csproj", "{C7268F56-8264-4F15-8207-8F7A89DC6780}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LinqSnippets", "LinqSnippest\LinqSnippets.csproj", "{62E9F7CC-8A22-47C2-8F07-BF8A9FC74D48}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "University_API_Backend", "University_API_Backend\University_API_Backend.csproj", "{0849549A-83E2-4F70-B8EA-4F1F1E311455}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C7268F56-8264-4F15-8207-8F7A89DC6780}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C7268F56-8264-4F15-8207-8F7A89DC6780}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C7268F56-8264-4F15-8207-8F7A89DC6780}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C7268F56-8264-4F15-8207-8F7A89DC6780}.Release|Any CPU.Build.0 = Release|Any CPU
-		{62E9F7CC-8A22-47C2-8F07-BF8A9FC74D48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{62E9F7CC-8A22-47C2-8F07-BF8A9FC74D48}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{62E9F7CC-8A22-47C2-8F07-BF8A9FC74D48}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{62E9F7CC-8A22-47C2-8F07-BF8A9FC74D48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0849549A-83E2-4F70-B8EA-4F1F1E311455}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0849549A-83E2-4F70-B8EA-4F1F1E311455}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0849549A-83E2-4F70-B8EA-4F1F1E311455}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0849549A-83E2-4F70-B8EA-4F1F1E311455}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
