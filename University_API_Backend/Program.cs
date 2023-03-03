@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using University_API_Backend.DataAcces;
 using University_API_Backend.Services;
+using Serilog;
 
 
 namespace University_API_Backend
@@ -14,6 +15,14 @@ namespace University_API_Backend
 
             var builder = WebApplication.CreateBuilder(args);
 
+            //Configurar Serilog
+            builder.Host.UseSerilog((hostBuilderCtx, loggerConf) =>
+            {
+                loggerConf
+                    .WriteTo.Console()
+                    .WriteTo.Debug()
+                    .ReadFrom.Configuration(hostBuilderCtx.Configuration);
+            });
 
             //2. Coexion con SQL Server Express
             const string CONNECTIONNAME = "UniversityDB";
@@ -112,6 +121,9 @@ namespace University_API_Backend
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+            //Decirle a la app que use Serilog
+            app.UseSerilogRequestLogging();
 
             app.UseHttpsRedirection();
 
