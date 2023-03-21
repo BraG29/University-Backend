@@ -19,11 +19,13 @@ namespace University_API_Backend.Controllers
     {
         private readonly UniversityDBContext _context;
         private readonly IIndicesService _indicesService;
+        private readonly IList<AccountController> _logger;
 
-        public IndiceController(UniversityDBContext context, IIndicesService indicesService)
+        public IndiceController(UniversityDBContext context, IIndicesService indicesService, IList<AccountController> logger)
         {
             _context = context;
             _indicesService = indicesService;
+            _logger = logger;
         }
 
         // GET: api/Indice

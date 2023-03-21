@@ -18,10 +18,12 @@ namespace University_API_Backend.Controllers
     public class UsuariosController : ControllerBase
     {
         private readonly UniversityDBContext _context;
+        private readonly IList<AccountController> _logger;
 
-        public UsuariosController(UniversityDBContext context)
+        public UsuariosController(UniversityDBContext context, IList<AccountController> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         // GET: https://localhost:7157/api/usuarios
@@ -80,7 +82,7 @@ namespace University_API_Backend.Controllers
         // POST: api/Usuarios
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator")]
         public async Task<ActionResult<Usuario>> PostUsuario(Usuario usuario)
         {
             try

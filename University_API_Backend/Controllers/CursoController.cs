@@ -19,11 +19,13 @@ namespace University_API_Backend.Controllers
     {
         private readonly UniversityDBContext _context;
         private readonly ICursosService _cursosService;
+        private readonly IList<AccountController> _logger;
 
-        public CursoController(UniversityDBContext context, ICursosService cursosService)
+        public CursoController(UniversityDBContext context, ICursosService cursosService, IList<AccountController> logger)
         {
             _context = context;
             _cursosService = cursosService;
+            _logger = logger;
         }
 
         // GET: api/Curso

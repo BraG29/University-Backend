@@ -17,6 +17,7 @@ namespace University_API_Backend.Controllers
         private readonly JwtSettings _jwtSettings;
         private readonly UniversityDBContext _context;
         private readonly IStringLocalizer<AccountController> _stringLocalizer;
+        private readonly IList<AccountController> _logger;
 
         /*        private IEnumerable<Usuario> _logins = new List<Usuario>
                 {
@@ -36,12 +37,13 @@ namespace University_API_Backend.Controllers
                     }
                 };*/
 
-        public AccountController(JwtSettings jwtSettings, UniversityDBContext context, 
-            IStringLocalizer<AccountController> stringLocalizer)
+        public AccountController(JwtSettings jwtSettings, UniversityDBContext context,
+            IStringLocalizer<AccountController> stringLocalizer, IList<AccountController> logger)
         {
             _jwtSettings = jwtSettings;
             _context = context;
             _stringLocalizer = stringLocalizer;
+            _logger = logger;
         }
 
         [HttpPost]

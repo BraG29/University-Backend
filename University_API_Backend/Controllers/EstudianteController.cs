@@ -20,11 +20,13 @@ namespace University_API_Backend.Controllers
         private readonly UniversityDBContext _context;
         //Servicio
         private readonly IEstudiantesService _estudiantesService;
+        private readonly IList<AccountController> _logger;
 
-        public EstudianteController(UniversityDBContext context, IEstudiantesService estudiantesService) 
+        public EstudianteController(UniversityDBContext context, IEstudiantesService estudiantesService, IList<AccountController> logger)
         {
             _context = context;
             _estudiantesService = estudiantesService;
+            _logger = logger;
         }
 
         // GET: api/Estudiante
